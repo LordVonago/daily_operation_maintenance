@@ -1,12 +1,36 @@
-# React + Vite
+# Daily Operation Maintenance
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto tem como objetivo gerenciar, documentar e disponibilizar informações relevantes para empresas. Ele facilita o acompanhamento de tarefas, registro de ocorrências, controle de manutenções, gestão básica de pessoas e muitas outras funções podem ser adicionadas de acordo com a necessidade.
 
-Currently, two official plugins are available:
+###### _Este é um template e deve servir de base para o desenvolvimento de aplicações reais_
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<!-- ## Funcionalidades
 
-## Expanding the ESLint configuration
+- Registro de operações diárias
+- Registro de manutenções
+- Histórico de ocorrências e intervenções
+- Disponibilizar dados para auditorias
+- Relatórios para acompanhamento (_em breve_) -->
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Como usar
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/seu-usuario/daily_operation_maintenance.git
+   ```
+
+2. Instale as dependencias:
+   ```bash
+   npm install
+   ```
+
+<!-- 2. Siga as instruções de instalação e uso no arquivo `INSTALL.md` (se disponível). -->
+
+## Contribuição
+
+Contribuições são bem-vindas! Abra uma issue ou envie um pull request.
+
+## Licença
+
+Consulte o arquivo `LICENSE` para mais informações.

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import classes from "./Home.module.css";
 import Footer from "../Footer/Footer.jsx";
+import Dash from "../Components/Dash.jsx";
 
 const Home = () => {
   let categories = [
@@ -27,6 +28,20 @@ const Home = () => {
       sessionStorage.setItem("date", date);
     }
   }, []);
+
+  function handleClick(e) {
+    const pElements = e.target.closest("ul").getElementsByTagName("p");
+    for (let i = 0; i < pElements.length; i++) {
+      const element = pElements[i];
+      element.style = "";
+    }
+
+    e.target.style.backgroundColor = "aliceblue";
+    e.target.style.fontSize = "large";
+    e.target.style.color = "#333";
+    e.target.style.fontWeight = "bold";
+    e.target.style.borderRadius = "0.3rem";
+  }
 
   return (
     <>
@@ -62,15 +77,23 @@ const Home = () => {
             {/* Barra de navegação (categorias) */}
             <section className={classes.categories}>
               <h3>Categorias:</h3>
-              {categories.map((element, index) => (
-                <p key={index}>{element}</p>
-              ))}
+              <ul>
+                {categories.map((element, index) => (
+                  <li key={index} onClick={(e) => handleClick(e)}>
+                    <p>{element}</p>
+                  </li>
+                ))}
+              </ul>
             </section>
           </aside>
 
           {/* Conteúdo das categorias ((((WIP)))) */}
           <div className={classes.content}>
-            <p>Content</p>
+            <article>
+              <div className={classes.dashContainer}>
+                <Dash />
+              </div>
+            </article>
           </div>
         </div>
         <Footer />
