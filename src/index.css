@@ -9,9 +9,13 @@
 
 html {
   scroll-behavior: smooth;
-  height: 100vh;
 
   &::-webkit-scrollbar {
     display: none;
   }
+}
+
+html,
+body {
+  height: 100%;
 }

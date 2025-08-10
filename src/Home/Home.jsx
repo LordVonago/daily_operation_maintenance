@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import classes from "./Home.module.css";
+import Footer from "../Footer/Footer.jsx";
 
 const Home = () => {
   let categories = [
@@ -72,6 +73,7 @@ const Home = () => {
             <p>Content</p>
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
