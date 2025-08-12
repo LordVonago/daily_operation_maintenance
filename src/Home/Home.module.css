@@ -1,7 +1,6 @@
-.mainContainer {
+/* .mainContainer {
   height: 100%;
-  height: calc(100vh - 12vh);
-}
+} */
 
 .NavBar {
   background-color: gray;
@@ -19,6 +18,7 @@
     min-width: fit-content;
     max-width: 13rem;
     width: 100%;
+    cursor: pointer;
 
     & img {
       max-width: 13rem;
@@ -31,7 +31,7 @@
     align-content: center;
     text-align: center;
     color: aliceblue;
-    font-size: xx-large;
+    font-size: 3vh;
     min-width: fit-content;
   }
 }
@@ -49,6 +49,7 @@
     width: 100%;
     background-color: #333;
     color: aliceblue;
+    height: 90vh;
 
     & input[type="date"] {
       font-size: 1rem;
@@ -59,7 +60,7 @@
 
       &::-webkit-calendar-picker-indicator {
         cursor: pointer;
-        background-color: #333;
+        background-color: #696969;
         padding: 0.5rem;
         /* border-radius: 0.4rem; */
       }
@@ -80,25 +81,23 @@
       display: flex;
       flex-direction: column;
       & p {
-        align-content: center;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         height: 3rem;
         padding-left: 1rem;
+        padding-right: 1rem;
         box-shadow: inset 0 0 1px 0px black;
         cursor: pointer;
         transition: all 0.2s;
         background-color: #333;
-
-        /* & p {
-          width: fit-content;
-        } */
-
-        &:hover {
-          font-size: large;
-          font-weight: bold;
-          background-color: aliceblue;
-          color: #333;
-          border-radius: 0.3rem;
-        }
+      }
+      & p:hover {
+        font-size: large;
+        font-weight: bold;
+        background-color: aliceblue;
+        color: #333;
+        border-radius: 0.3rem;
       }
     }
   }
@@ -107,10 +106,11 @@
 .content {
   width: 100%;
   background-color: rgb(177, 177, 177);
-  box-shadow: inset 0 0 1px 0px black;
-}
-
-.dashContainer {
+  display: flex;
+  flex-direction: column;
+  & div {
+    flex-grow: 1;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -120,18 +120,14 @@
     width: 200px;
     /* background-color: aliceblue; */
   }
-  .pageContainer .leftAside {
-    & section {
-      & h3 {
-        /* margin: 0.1rem; */
-      }
-      & input[type="date"] {
-        /* padding: 0.1rem;
-        margin-bottom: 0.6rem; */
-      }
-    }
+}
+
+@media screen and (max-height: 480px) {
+  .NavBar {
+    position: relative;
   }
-  .pageContainer .leftAside .categories p {
-    /* height: 2rem; */
+
+  .pageContainer .leftAside {
+    height: 100%;
   }
 }
