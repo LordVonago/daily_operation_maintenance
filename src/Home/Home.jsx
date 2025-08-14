@@ -8,40 +8,41 @@ const Home = () => {
   let categories = [
     {
       label: "Segurança",
-      id: "Safety",
+      link: "Safety",
     },
     {
       label: "5S",
-      id: "S5",
+      link: "S5",
     },
     {
       label: "Pessoas",
-      id: "People",
+      link: "People",
     },
     {
       label: "Equipamento",
-      id: "Equipament",
+      link: "Equipament",
     },
     {
       label: "Manutenção",
-      id: "Maintenance",
+      link: "Maintenance",
     },
     {
       label: "Férias",
-      id: "Vacation",
+      link: "Vacation",
     },
     {
       label: "outros",
-      id: "Others",
+      link: "Others",
     },
     // {
     //   label: "Pessoas",
-    //   id: "People",
+    //   link: "People",
     // },
   ];
 
   const [inputdatevalue, setinputdatevalue] = useState("");
 
+  // Define a data do filtro como o dia atual e salva na localStorage
   useEffect(() => {
     let date = new Date();
     date = date.toISOString().split("T")[0];
@@ -54,36 +55,49 @@ const Home = () => {
     }
   }, []);
 
+  // Executa as ações para exibição das telas ao selecionar uma categoria na Navbar
   function handleClick(e) {
     sessionStorage.setItem("Category", e.target.innerText);
 
-    const pElements = e.target.closest("ul").getElementsByTagName("p");
-    for (let i = 0; i < pElements.length; i++) {
-      const element = pElements[i];
-      element.style = "";
+    // Coleta informações e limpa os estilos dos elementos <p>
+    {
+      const pElements = e.target.closest("ul").getElementsByTagName("p");
+      for (let i = 0; i < pElements.length; i++) {
+        const element = pElements[i];
+        element.style = "";
+      }
     }
 
-    let activatedEl = e.target.id;
+    // Estilos aplicados ao clicar nos elementos <p>
+    {
+      e.target.style.backgroundColor = "#607d8b";
+      e.target.style.fontSize = "large";
+      e.target.style.color = "#fff";
+      e.target.style.fontWeight = "bold";
+      e.target.style.boxShadow = "inset 0 0 2px 0 black";
+      e.target.style.marginLeft = "1px";
+      e.target.style.marginRight = "1px";
+      e.target.style.borderRadius = "0.3rem";
+    }
 
-    e.target.style.backgroundColor = "aliceblue";
-    e.target.style.fontSize = "large";
-    e.target.style.color = "#333";
-    e.target.style.fontWeight = "bold";
-    e.target.style.borderRadius = "0.3rem";
+    // Coleta as informações e altera a visibilidade das categorias
+    {
+      let activatedElementLinkAt = e.target.getAttribute("link");
+      const divElements = document
+        .querySelector("article")
+        .getElementsByTagName("div");
 
-    const divElements = document
-      .querySelector("article")
-      .getElementsByTagName("div");
+      for (let i = 0; i < divElements.length; i++) {
+        const element = divElements[i];
+        let elementLinkAt = element.getAttribute("link");
 
-    for (let i = 0; i < divElements.length; i++) {
-      const element = divElements[i];
-
-      if (element.id == activatedEl) {
-        element.style = "";
-      } else {
-        element.id !== ""
-          ? (element.style.display = "none")
-          : (element.style = "");
+        if (elementLinkAt == activatedElementLinkAt) {
+          element.style = "";
+        } else if (elementLinkAt == null || elementLinkAt == undefined) {
+          element.style = "";
+        } else {
+          element.style.display = "none";
+        }
       }
     }
   }
@@ -106,7 +120,7 @@ const Home = () => {
 
         {/* Conteúdo */}
         <div className={classes.pageContainer}>
-          {/* Barra de navegação (Filtros de data) */}
+          {/* Barra de navegação lateral (Filtros de data) */}
           <aside className={classes.leftAside}>
             <section>
               <h3>Data:</h3>
@@ -128,13 +142,7 @@ const Home = () => {
               <ul>
                 {categories.map((element, index) => (
                   <li key={index} onClick={(e) => handleClick(e)}>
-                    <p id={element.id}>
-                      {element.label}{" "}
-                      <i
-                        class="fa-solid fa-arrow-right"
-                        style={{ color: "#333" }}
-                      />
-                    </p>
+                    <p link={element.link}>{element.label} </p>
                   </li>
                 ))}
               </ul>
@@ -143,16 +151,14 @@ const Home = () => {
 
           {/* Conteúdo das categorias ((((WIP)))) */}
           <article className={classes.content}>
-            {/* Conteúdo das categorias ((((WIP)))) */}
-
             {/* DashBoard */}
-            <div id="Dash" className={classes.dashContainer}>
+            <div link="Dash" className={classes.dashContainer}>
               <Dash />
             </div>
 
             {/* 5S */}
             <div
-              id="Safety"
+              link="Safety"
               className={classes.safetyContainer}
               style={{ display: "none" }}
             >
@@ -161,7 +167,7 @@ const Home = () => {
 
             {/* 5S */}
             <div
-              id="S5"
+              link="S5"
               className={classes.S5Container}
               style={{ display: "none" }}
             >
@@ -170,7 +176,7 @@ const Home = () => {
 
             {/* Pessoas */}
             <div
-              id="People"
+              link="People"
               className={classes.peopleContainer}
               style={{ display: "none" }}
             >
@@ -179,7 +185,7 @@ const Home = () => {
 
             {/* Equipamentos */}
             <div
-              id="Equipament"
+              link="Equipament"
               className={classes.equipamentContainer}
               style={{ display: "none" }}
             >
@@ -188,7 +194,7 @@ const Home = () => {
 
             {/* Manutenção */}
             <div
-              id="Maintenance"
+              link="Maintenance"
               className={classes.maintenanceContainer}
               style={{ display: "none" }}
             >
@@ -197,7 +203,7 @@ const Home = () => {
 
             {/* Férias */}
             <div
-              id="Vacation"
+              link="Vacation"
               className={classes.vacationContainer}
               style={{ display: "none" }}
             >
@@ -206,7 +212,7 @@ const Home = () => {
 
             {/* Outros */}
             <div
-              id="Others"
+              link="Others"
               className={classes.othersContainer}
               style={{ display: "none" }}
             >

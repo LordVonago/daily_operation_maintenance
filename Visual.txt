@@ -1,0 +1,22 @@
+Topo/Menu: #455A64 (Cinza azulado)
+Hover/Seleção: #607D8B (Cinza médio)
+Fundo conteúdo: #CFD8DC (Cinza bem claro)
+Texto: #FFFFFF (Branco) / #212121 (Preto suave)
+Acento (botões/detalhes): #90A4AE
+Acento: #2980B9 (Azul vivo) ou #27AE60 (Verde para ações positivas).
+
+
+
+Topo/Menu: #37474F (Cinza carvão)
+Hover/Seleção: #546E7A
+Fundo conteúdo: #ECEFF1 (Cinza quase branco)
+Texto: #FFFFFF / #263238
+Acento: #FF9800 (Laranja queimado) — para botões e destaque.
+
+
+
+Topo/Menu: #2C3E50 (Azul petróleo)
+Hover/Seleção: #34495E
+Fundo conteúdo: #ECF0F1
+Texto: #FFFFFF / #2C3E50
+Acento: #2980B9 (Azul vivo) ou #27AE60 (Verde para ações positivas).
