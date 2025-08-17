@@ -38,4 +38,9 @@
 - Correção de inconsistências visuais e funcionais na navegação lateral.
 - Ajuste na exibição do Footer conforme estado da barra lateral.
 
-> este resumo foi gerado por IA e cobre todos os pontos importantes das alterações realizadas.
+> Este resumo foi gerado por IA e cobre todos os pontos importantes das alterações realizadas.
+
+### Corrigido
+
+- **src/Home/Home.jsx**
+- Correção na exibição da barra lateral

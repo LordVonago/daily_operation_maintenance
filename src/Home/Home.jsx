@@ -49,10 +49,11 @@ const Home = () => {
     // },
   ];
 
-  const [InputDateValue, setInputDateValue] = useState("");
-  const [leftAsideOpen, setleftAsideOpen] = useState(
-    true || sessionStorage.getItem("drawerPos") === "true"
-  );
+  const [InputDateValue, setInputDateValue] = useState(getDate());
+  const [leftAsideOpen, setleftAsideOpen] = useState(() => {
+    const pr = sessionStorage.getItem("drawerPos");
+    return pr === "true" || pr == null;
+  });
 
   // obtém a data atual
   function getDate() {
@@ -65,7 +66,7 @@ const Home = () => {
   useEffect(() => {
     function storeDate() {
       let date = getDate();
-      setInputDateValue(date);
+      // setInputDateValue(date);
 
       if (sessionStorage.getItem("date")) {
         return;
