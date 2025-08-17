@@ -3,36 +3,45 @@ import classes from "./Home.module.css";
 import Footer from "../Components/Footer/Footer.jsx";
 import Dash from "../Components/Dashboard/Dash.jsx";
 import S5 from "../Components/5S/S5.jsx";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fab } from "@fortawesome/free-brands-svg-icons";
 
 const Home = () => {
   let categories = [
     {
       label: "Segurança",
       link: "Safety",
+      icon: "fa-solid fa-shield",
     },
     {
       label: "5S",
       link: "S5",
+      icon: "fa-solid fa-broom",
     },
     {
       label: "Pessoas",
       link: "People",
+      icon: "fa-solid fa-user",
     },
     {
       label: "Equipamento",
       link: "Equipament",
+      icon: "fa-solid fa-toolbox",
     },
     {
       label: "Manutenção",
       link: "Maintenance",
+      icon: "fa-solid fa-screwdriver-wrench",
     },
     {
       label: "Férias",
       link: "Vacation",
+      icon: "fa-solid fa-sun",
     },
     {
-      label: "outros",
+      label: "Outros",
       link: "Others",
+      icon: "fa-solid fa-bars",
     },
     // {
     //   label: "Pessoas",
@@ -40,49 +49,63 @@ const Home = () => {
     // },
   ];
 
-  const [inputdatevalue, setinputdatevalue] = useState("");
+  const [InputDateValue, setInputDateValue] = useState("");
+  const [leftAsideOpen, setleftAsideOpen] = useState(
+    true || sessionStorage.getItem("drawerPos") === "true"
+  );
+
+  // obtém a data atual
+  function getDate() {
+    let date = new Date();
+    date = date.toISOString().split("T")[0];
+    return date;
+  }
 
   // Define a data do filtro como o dia atual e salva na localStorage
   useEffect(() => {
-    let date = new Date();
-    date = date.toISOString().split("T")[0];
-    setinputdatevalue(date);
+    function storeDate() {
+      let date = getDate();
+      setInputDateValue(date);
 
-    if (sessionStorage.getItem("date")) {
-      return;
-    } else {
-      sessionStorage.setItem("date", date);
+      if (sessionStorage.getItem("date")) {
+        return;
+      } else {
+        sessionStorage.setItem("date", date);
+      }
     }
+    storeDate();
   }, []);
 
-  // Executa as ações para exibição das telas ao selecionar uma categoria na Navbar
+  // Executa as ações para exibição das telas ao selecionar uma categoria no leftAside
   function handleClick(e) {
-    sessionStorage.setItem("Category", e.target.innerText);
+    let styledLiEl = e.currentTarget;
 
     // Coleta informações e limpa os estilos dos elementos <p>
     {
-      const pElements = e.target.closest("ul").getElementsByTagName("p");
-      for (let i = 0; i < pElements.length; i++) {
-        const element = pElements[i];
+      const liElements = e.target.closest("ul").getElementsByTagName("li");
+      for (let i = 0; i < liElements.length; i++) {
+        const element = liElements[i];
+        if (element.id == "drawer") break;
         element.style = "";
       }
     }
 
     // Estilos aplicados ao clicar nos elementos <p>
     {
-      e.target.style.backgroundColor = "#607d8b";
-      e.target.style.fontSize = "large";
-      e.target.style.color = "#fff";
-      e.target.style.fontWeight = "bold";
-      e.target.style.boxShadow = "inset 0 0 2px 0 black";
-      e.target.style.marginLeft = "1px";
-      e.target.style.marginRight = "1px";
-      e.target.style.borderRadius = "0.3rem";
+      styledLiEl.style.backgroundColor = "#607d8b";
+      styledLiEl.style.fontSize = "large";
+      styledLiEl.style.color = "#fff";
+      styledLiEl.style.fontWeight = "bold";
+      styledLiEl.style.boxShadow = "inset 0 0 2px 0 black";
+      styledLiEl.style.marginLeft = "1px";
+      styledLiEl.style.marginRight = "1px";
+      styledLiEl.style.borderRadius = "0.3rem";
     }
 
     // Coleta as informações e altera a visibilidade das categorias
     {
-      let activatedElementLinkAt = e.target.getAttribute("link");
+      let activatedElementLinkAt = styledLiEl.getAttribute("link");
+
       const divElements = document
         .querySelector("article")
         .getElementsByTagName("div");
@@ -100,6 +123,12 @@ const Home = () => {
         }
       }
     }
+  }
+
+  // Oculta/Mostra a barra lateral
+  function handleDrawerAction(e) {
+    setleftAsideOpen((prev) => !prev);
+    sessionStorage.setItem("drawerPos", !leftAsideOpen);
   }
 
   return (
@@ -121,16 +150,21 @@ const Home = () => {
         {/* Conteúdo */}
         <div className={classes.pageContainer}>
           {/* Barra de navegação lateral (Filtros de data) */}
-          <aside className={classes.leftAside}>
+          <aside
+            id="leftAside"
+            className={`${
+              leftAsideOpen ? classes.leftAside : classes.leftAsideColapsed
+            }`}
+          >
             <section>
               <h3>Data:</h3>
               <input
                 type="date"
                 name="date"
                 id="date"
-                value={sessionStorage.getItem("date") ?? inputdatevalue}
+                value={sessionStorage.getItem("date") ?? InputDateValue}
                 onChange={(e) => {
-                  setinputdatevalue(e.target.value);
+                  setInputDateValue(e.target.value);
                   sessionStorage.setItem("date", e.target.value);
                 }}
               />
@@ -141,12 +175,34 @@ const Home = () => {
               <h3>Categorias:</h3>
               <ul>
                 {categories.map((element, index) => (
-                  <li key={index} onClick={(e) => handleClick(e)}>
-                    <p link={element.link}>{element.label} </p>
+                  <li
+                    key={index}
+                    link={element.link}
+                    onClick={(e) => handleClick(e)}
+                  >
+                    <FontAwesomeIcon icon={element.icon} />{" "}
+                    <p>{element.label}</p>
                   </li>
                 ))}
+                <li
+                  id="drawer"
+                  className={classes.drawer}
+                  onClick={(e) => handleDrawerAction(e)}
+                >
+                  <FontAwesomeIcon icon="fa-solid fa-angles-left" />
+                </li>
               </ul>
             </section>
+            {/* Footer */}
+            <footer>
+              {leftAsideOpen ? (
+                <Footer />
+              ) : (
+                <a href="https://github.com/LordVonago" target="blank">
+                  <FontAwesomeIcon icon="fa-brands fa-github" />
+                </a>
+              )}
+            </footer>
           </aside>
 
           {/* Conteúdo das categorias ((((WIP)))) */}
@@ -218,11 +274,6 @@ const Home = () => {
             >
               <p>Outros</p>
             </div>
-
-            {/* Footer */}
-            <footer>
-              <Footer />
-            </footer>
           </article>
         </div>
       </div>

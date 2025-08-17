@@ -1,5 +1,4 @@
 // Os elementos <div> não podem conter id
-
 import classes from "./Dash.module.css";
 
 const Dash = () => {
@@ -16,6 +15,7 @@ const Dash = () => {
             <p>click1</p>
             <h1>teste</h1>
           </details>
+          <p>ws</p>
         </details>
       </div>
     </>

@@ -31,6 +31,6 @@ Este projeto tem como objetivo gerenciar, documentar e disponibilizar informaç�
 
 Contribuições são bem-vindas! Abra uma issue ou envie um pull request.
 
-## Licença
+## [Licença](http://github.com/LordVonago/daily_operation_maintenance?tab=MIT-1-ov-file)
 
 Consulte o arquivo `LICENSE` para mais informações.
