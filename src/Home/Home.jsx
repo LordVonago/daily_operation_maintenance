@@ -9,50 +9,51 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 const Home = () => {
   let categories = [
     {
-      label: "Segurança",
+      label: " Inicio",
+      link: "Dash",
+      icon: "fa-solid fa-house",
+    },
+    {
+      label: " Segurança",
       link: "Safety",
       icon: "fa-solid fa-shield",
     },
     {
-      label: "5S",
+      label: " 5S",
       link: "S5",
       icon: "fa-solid fa-broom",
     },
     {
-      label: "Pessoas",
+      label: " Pessoas",
       link: "People",
       icon: "fa-solid fa-user",
     },
     {
-      label: "Equipamento",
+      label: " Equipamento",
       link: "Equipament",
       icon: "fa-solid fa-toolbox",
     },
     {
-      label: "Manutenção",
+      label: " Manutenção",
       link: "Maintenance",
       icon: "fa-solid fa-screwdriver-wrench",
     },
     {
-      label: "Férias",
+      label: " Férias",
       link: "Vacation",
       icon: "fa-solid fa-sun",
     },
     {
-      label: "Outros",
+      label: " Outros",
       link: "Others",
       icon: "fa-solid fa-bars",
     },
-    // {
-    //   label: "Pessoas",
-    //   link: "People",
-    // },
   ];
 
   const [InputDateValue, setInputDateValue] = useState(getDate());
   const [leftAsideOpen, setleftAsideOpen] = useState(() => {
-    const pr = sessionStorage.getItem("drawerPos");
-    return pr === "true" || pr == null;
+    const drawerPos = sessionStorage.getItem("drawerPos");
+    return drawerPos === "true" || drawerPos == null;
   });
 
   // obtém a data atual
@@ -157,7 +158,7 @@ const Home = () => {
               leftAsideOpen ? classes.leftAside : classes.leftAsideColapsed
             }`}
           >
-            <section>
+            <section className={classes.dateInputSec}>
               <h3>Data:</h3>
               <input
                 type="date"
@@ -168,6 +169,20 @@ const Home = () => {
                   setInputDateValue(e.target.value);
                   sessionStorage.setItem("date", e.target.value);
                 }}
+              />
+            </section>
+            <section
+              className={
+                !leftAsideOpen
+                  ? classes.dayIndicator
+                  : classes.dayIndicatorColapsed
+              }
+            >
+              <input
+                className={classes.dayIndicatorDate}
+                type="text"
+                readOnly
+                value={InputDateValue.split("-")[2]}
               />
             </section>
 
@@ -182,7 +197,7 @@ const Home = () => {
                     onClick={(e) => handleClick(e)}
                   >
                     <FontAwesomeIcon icon={element.icon} />{" "}
-                    <p>{element.label}</p>
+                    <p className={classes.label}> {element.label}</p>
                   </li>
                 ))}
                 <li
